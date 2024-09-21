@@ -11,21 +11,26 @@
     <h1>Clicker Game!</h1>
     <p id="clicks">Clicks: 0</p>
     <p id="autoclicks">Auto Clicks: 0/s</p>
+    <p id="clickMulti" title="To get a higher click multi, try rebirthing.">Click Multi: 0</p>
 </head>
 
 <body></body>
 <h3>Clickers</h3>
 <button type="button" class="clicker" name="Bronze" cost=1 autoclicks=0.5>Buy 1x Bronze Clicker</button>
-<button type="button" class="clicker" name="Silver" cost=5 autoclicks=1 >Buy 1x Silver Clicker</button>
-<button type="button" class="clicker" name="Gold" cost=15 autoclicks=1.5 >Buy 1x Gold Clicker</button>
-<button type="button" class="multiply" multi=1 >x multiplier</button>
-<h4>Specials</h4>
-<button type="button" class="upgrade" cost=100000 rebirths=1>Rebirth</button>
+<button type="button" class="clicker" name="Silver" cost=5 autoclicks=1>Buy 1x Silver Clicker</button>
+<button type="button" class="clicker" name="Gold" cost=15 autoclicks=1.5>Buy 1x Gold Clicker</button>
+<button type="button" class="clicker" name="Gold" cost=20 autoclicks=2>Buy 1x Platinum Clicker</button>
+<button type="button" class="multiply" multi=1>x multiplier</button>
+<h4>Upgrades</h4>
+<button type="button" class="upgrade" cost=100000 rebirths=1
+    title="Gives click multi but resets CLICKS and AUTO CLICKS!!">Rebirth</button>
 <br></br>
 <button type="button" id="click" class="click">Click Me!</button>
 </body>
 <br></br>
-<footer>made by <a hreflang="en"target="_blank"  rel="noopener noreferrer" referrerpolicy="no-referrer" href="https://github.com/im-wrek">wrek</a></footer>
+<footer>made by <a hreflang="en" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+        href="https://github.com/im-wrek">wrek</a></footer>
+<p>Hover over things for more information</p>
 <script src="index.js"></script>
 
 </html>
