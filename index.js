@@ -93,7 +93,7 @@
     }
 
     function getCookieValue(cookieName){
-        document.cookie.split(";").forEach(cookie => {
+        document.cookie.split("; ").forEach(cookie => {
             var split = cookie.split("=")
             var key = split[0]
             var value = split[1]
@@ -117,8 +117,7 @@
     function update() {
         updateButtons()
         updateLabels()
-        console.log("new")
-        document.cookie = "clicks=" + clicks + ";autoclicks=" + clicksPerSecond + ";cmulti=" + clickmulti
+        document.cookie = "clicks=" + clicks + "; autoclicks=" + clicksPerSecond + "; cmulti=" + clickmulti
     }
 
     function gameLoop() {
@@ -128,7 +127,6 @@
         }
 
         gameLoopTime = (1000 - (clicksPerSecond * 100))
-        console.log(gameLoopTime)
     }
 
     function setup() {
