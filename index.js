@@ -32,7 +32,7 @@
                 element.setAttribute("disabled", true)
             }
         }
-        
+
         for (let i = 0; i < upgrades.length; i++) {
             let element = upgrades[i]
             let cost = parseFloat(element.getAttribute("cost"))
@@ -77,10 +77,12 @@
             element.innerHTML += " (" + formatN(cost) + " clicks)"
             element.onclick = function () {
                 if (rebirth > 0) {
-                    clickmulti += 1
-                    clicks = 0
-                    clicksPerSecond = 0
-                    update()
+                    if (clicks >= cost) {
+                        clickmulti += 1
+                        clicks = 0
+                        clicksPerSecond = 0
+                        update()
+                    }
                 }
             }
         }
@@ -146,17 +148,17 @@
 
     function gameLoop() {
         if (clicksPerSecond > 0) {
-            clicks += clickmulti
+            clicks += (clickmulti) + parseInt((clicksPerSecond/gameLoopTime)/1000)
             update()
         }
 
-        gameLoopTime = (1000 - (clicksPerSecond * 100))
+        gameLoopTime = (1000/(clicksPerSecond))
     }
 
     function setup() {
         setupButtons()
         clicks = (parseInt(getCookie("c")) || 0)
-        clicksPerSecond = (parseInt(getCookie("cs")) || 0)
+        clicksPerSecond = (parseInt(getCookie("cs")) || 24073)
         clickmulti = (parseInt(getCookie("cm")) || 1)
         clickBtn.onclick = function () {
             clicks += clickmulti
