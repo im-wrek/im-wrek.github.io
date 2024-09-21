@@ -117,6 +117,7 @@
     function update() {
         updateButtons()
         updateLabels()
+        console.log("new")
         document.cookie = "clicks=" + clicks + ";autoclicks=" + clicksPerSecond + ";cmulti=" + clickmulti
     }
 
