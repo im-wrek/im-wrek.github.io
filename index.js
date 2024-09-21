@@ -114,19 +114,24 @@
 
     function gameLoop() {
         clicks += clicksPerSecond
-        update()
+        if(clicksPerSecond>0){
+            update()
+        }
     }
 
     function setup() {
         setupButtons()
-        clicks=getCookieValue(clicks)
-        clicksPerSecond=getCookieValue(clicksPerSecond)
-        clickmulti=getCookieValue(clickmulti)
+        if(getCookieValue("clicks")){
+            clicks=(getCookieValue("clicks"))
+            clicksPerSecond=(getCookieValue("clicksPerSecond") || 0)
+            clickmulti=(getCookieValue("clickmulti") || 0)
+        }
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
         }
         loop()
+        update()
     }
 
     async function loop() {
@@ -136,6 +141,6 @@
         }
     }
     // Code \\
-    
+
     setup()
 })()
