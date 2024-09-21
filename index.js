@@ -66,7 +66,7 @@
             }
             element.innerHTML += " (" + formatN(cost) + " clicks)"
             element.onclick = function () {
-                if (rebirth>0){
+                if (rebirth > 0) {
                     clickmulti += 1
                     clicks = 0
                     clicksPerSecond = 0
@@ -92,21 +92,32 @@
         }
     }
 
-    function getCookieValue(cookieName){
-        document.cookie.split("; ").forEach(cookie => {
-            var split = cookie.split("=")
-            var key = split[0]
-            var value = split[1]
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
-            if (key == cookieName){
-                return value;
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
             }
-        })
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
     }
 
     function updateLabels() {
         clickLabel.innerHTML = "Clicks: " + formatN(clicks)
-        autoclicksLabel.innerHTML = "Auto Clicks: " + formatN(clicksPerSecond) + "/s"
+        autoclicksLabel.innerHTML = formatN(clicksPerSecond) + " cps"
         clickmultiLabel.innerHTML = formatN(clickmulti) + "x Click Multi"
     }
 
@@ -117,11 +128,13 @@
     function update() {
         updateButtons()
         updateLabels()
-        document.cookie = "clicks=" + clicks + "; autoclicks=" + clicksPerSecond + "; cmulti=" + clickmulti
+        setCookie("c", clicks, 365)
+        setCookie("cs", clicksPerSecond, 365)
+        setCookie("cm", clickmulti, 365)
     }
 
     function gameLoop() {
-        if(clicksPerSecond > 0){
+        if (clicksPerSecond > 0) {
             clicks += clickmulti
             update()
         }
@@ -131,11 +144,9 @@
 
     function setup() {
         setupButtons()
-        if(getCookieValue("clicks")){
-            clicks=(getCookieValue("clicks"))
-            clicksPerSecond=(getCookieValue("clicksPerSecond") || 0)
-            clickmulti=(getCookieValue("clickmulti") || 0)
-        }
+        clicks = (parseInt(getCookieValue("c")) || 0)
+        clicksPerSecond = (parseInt(getCookieValue("cs")) || 0)
+        clickmulti = (parseInt(getCookieValue("cm")) || 0)
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
