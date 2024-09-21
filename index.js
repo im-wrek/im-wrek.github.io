@@ -144,9 +144,9 @@
 
     function setup() {
         setupButtons()
-        clicks = (parseInt(getCookieValue("c")) || 0)
-        clicksPerSecond = (parseInt(getCookieValue("cs")) || 0)
-        clickmulti = (parseInt(getCookieValue("cm")) || 0)
+        clicks = (parseInt(getCookie("c")) || 0)
+        clicksPerSecond = (parseInt(getCookie("cs")) || 0)
+        clickmulti = (parseInt(getCookie("cm")) || 0)
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
