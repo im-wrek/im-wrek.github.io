@@ -32,6 +32,16 @@
                 element.setAttribute("disabled", true)
             }
         }
+        
+        for (let i = 0; i < upgrades.length; i++) {
+            let element = upgrades[i]
+            let cost = parseFloat(element.getAttribute("cost"))
+            if (clicks >= cost) {
+                element.removeAttribute("disabled")
+            } else {
+                element.setAttribute("disabled", true)
+            }
+        }
     }
 
     function setupButtons() {
@@ -163,6 +173,5 @@
         }
     }
     // Code \\
-
     setup()
 })()
