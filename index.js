@@ -127,6 +127,7 @@
     }
 
     function update() {
+        updateButtons()
         updateLabels()
         setCookie("c", clicks, 365)
         setCookie("cs", clicksPerSecond, 365)
@@ -144,7 +145,6 @@
 
     function setup() {
         setupButtons()
-        updateButtons()
         clicks = (parseInt(getCookie("c")) || 0)
         clicksPerSecond = (parseInt(getCookie("cs")) || 0)
         clickmulti = (parseInt(getCookie("cm")) || 1)
