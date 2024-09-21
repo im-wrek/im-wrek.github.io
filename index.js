@@ -5,6 +5,7 @@
     var gameLoopTime = 1000
     var clickmulti = 1
     // Elements \\
+    const clickmultiLabel = document.getElementById("clickMulti")
     const multiplyBtn = document.getElementsByClassName("multiply")[0]
     const clickers = document.getElementsByClassName("clicker")
     const upgrades = document.getElementsByClassName("upgrade")
@@ -24,7 +25,7 @@
             let cost = parseFloat(element.getAttribute("cost")) * multi
             let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0) * multi
             element.innerHTML = "Buy " + formatN(multi) + "x " + element.getAttribute("name") + " clicker(s) (" + formatN(cost) + " clicks)"
-            element.setAttribute("title", "Gives " + formatN(autoclicks) + " auto clicks")
+            element.setAttribute("title", "Gives " + formatN(autoclicks) + " Auto Clicks")
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
             } else {
@@ -44,7 +45,7 @@
             element.setAttribute("title", "Gives " + formatN(autoclicks) + " auto clicks")
             element.onclick = function () {
                 let multi = (parseInt(multiplyBtn.getAttribute("multi")) || 1)
-                let cost = (parseFloat(element.getAttribute("cost")) || 0) * multi
+                let cost = (parseInt(element.getAttribute("cost")) || 0) * multi
                 let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0) * multi
                 if (clicks >= cost) {
                     clicks -= cost
@@ -56,7 +57,8 @@
 
         for (let i = 0; i < upgrades.length; i++) {
             let element = upgrades[i]
-            let cost = parseFloat(element.getAttribute("cost")) * multi
+            let cost = parseInt(element.getAttribute("cost")) || 0
+            let rebirth = parseInt(element.getAttribute("rebirth")) || 0
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
             } else {
@@ -64,7 +66,12 @@
             }
             element.innerHTML += " (" + formatN(cost) + " clicks)"
             element.onclick = function () {
-
+                if (rebirth>0){
+                    clickmulti += 1
+                    clicks = 0
+                    clicksPerSecond = 0
+                    update()
+                }
             }
         }
 
@@ -100,6 +107,7 @@
     function updateLabels() {
         clickLabel.innerHTML = "Clicks: " + formatN(clicks)
         autoclicksLabel.innerHTML = "Auto Clicks: " + formatN(clicksPerSecond) + "/s"
+        clickmultiLabel.innerHTML = formatN(clickmulti) + "x Click Multi"
     }
 
     function sleep(ms) {
@@ -113,10 +121,13 @@
     }
 
     function gameLoop() {
-        clicks += clicksPerSecond
-        if(clicksPerSecond>0){
+        if(clicksPerSecond > 0){
+            clicks += clickmulti
             update()
         }
+
+        gameLoopTime = (1000 - (clicksPerSecond * 100))
+        console.log(gameLoopTime)
     }
 
     function setup() {
