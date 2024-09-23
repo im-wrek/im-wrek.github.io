@@ -14,8 +14,29 @@
     const clickLabel = document.getElementById("clicks")
     const autoclicksLabel = document.getElementById("autoclicks")
     // Functions \\
+    function abbreviateNumber(value) {
+        var newValue = value;
+        if (value >= 1000) {
+            var suffixes = ["", "K", "M", "B", "T", "QA", "QI", "SX", "SP", "OC", "NO", "DC", "UD", "DD", "TD", "QAD", "QID", "SXD", "SPD", "OCD", "NOD", "VG", "UVG"];
+            var suffixNum = Math.floor( (""+value).length/3 );
+            var shortValue = '';
+            for (var precision = 2; precision >= 1; precision--) {
+                shortValue = parseFloat( (suffixNum != 0 ? (value / Math.pow(1000,suffixNum) ) : value).toPrecision(precision));
+                var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
+                if (dotLessShortValue.length <= 2) { break; }
+            }
+            if (shortValue % 1 != 0)  shortValue = shortValue.toFixed(1);
+            newValue = shortValue+suffixes[suffixNum];
+        }
+        return newValue;
+    }
+
     function formatN(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        if(x>1e19){
+            return abbreviateNumber(x)
+        } else {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
     }
     function updateButtons() {
         let multi = (parseInt(multiplyBtn.getAttribute("multi")) || 1)
@@ -141,14 +162,11 @@
     function update() {
         updateButtons()
         updateLabels()
-        setCookie("c", clicks, 365)
-        setCookie("cs", clicksPerSecond, 365)
-        setCookie("cm", clickmulti, 365)
     }
 
     function gameLoop() {
         if (clicksPerSecond > 0) {
-            clicks += (clickmulti) + parseInt((clicksPerSecond/gameLoopTime)/1000)
+            clicks += (clickmulti)
             update()
         }
 
@@ -158,7 +176,7 @@
     function setup() {
         setupButtons()
         clicks = (parseInt(getCookie("c")) || 0)
-        clicksPerSecond = (parseInt(getCookie("cs")) || 0)
+        clicksPerSecond = (parseInt(getCookie("cs")) || 1000)
         clickmulti = (parseInt(getCookie("cm")) || 1)
         clickBtn.onclick = function () {
             clicks += clickmulti
@@ -166,6 +184,12 @@
         }
         loop()
         update()
+        window.addEventListener('beforeunload', (event) => {
+            setCookie("c", clicks, 365)
+            setCookie("cs", clicksPerSecond, 365)
+            setCookie("cm", clickmulti, 365)
+            event.returnValue = '';
+          });
     }
 
     async function loop() {
