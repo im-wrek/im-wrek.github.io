@@ -176,7 +176,7 @@
     function setup() {
         setupButtons()
         clicks = (parseInt(getCookie("c")) || 0)
-        clicksPerSecond = (parseInt(getCookie("cs")) || 1000)
+        clicksPerSecond = (parseInt(getCookie("cs")) || 0)
         clickmulti = (parseInt(getCookie("cm")) || 1)
         clickBtn.onclick = function () {
             clicks += clickmulti
