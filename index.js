@@ -2,11 +2,23 @@
     // Game Variables \\
     var clicks = 0
     var clicksPerSecond = 0
-    var gameLoopTime = 1000
+    var gameLoopTime = 100
     var clickmulti = 1
+
+    const Clickers = [
+        ["Bronze", 1, 10],
+        ["Silver", 5, 50],
+        ["Gold", 100, 1000],
+        ["Platinum", 500, 5000],
+        ["Diamond", 1000, 10000],
+        ["Amethyst", 5000, 50000],
+        ["Sapphire", 10000, 100000],
+        ["Ruby", 100000, 1000000],
+        ["Rose Gold", 500000, 5000000],
+        ["Blood Diamond", 1000000, 10000000],
+    ]
     // Elements \\
     const clickmultiLabel = document.getElementById("clickMulti")
-    const multiplyBtn = document.getElementsByClassName("multiply")[0]
     const clickers = document.getElementsByClassName("clicker")
     const upgrades = document.getElementsByClassName("upgrade")
     const clickBtn = document.getElementById("click")
@@ -18,34 +30,33 @@
         var newValue = value;
         if (value >= 1000) {
             var suffixes = ["", "K", "M", "B", "T", "QA", "QI", "SX", "SP", "OC", "NO", "DC", "UD", "DD", "TD", "QAD", "QID", "SXD", "SPD", "OCD", "NOD", "VG", "UVG"];
-            var suffixNum = Math.floor( (""+value).length/3 );
+            var suffixNum = Math.floor(("" + value).length / 3);
             var shortValue = '';
             for (var precision = 2; precision >= 1; precision--) {
-                shortValue = parseFloat( (suffixNum != 0 ? (value / Math.pow(1000,suffixNum) ) : value).toPrecision(precision));
-                var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
+                shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
+                var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
                 if (dotLessShortValue.length <= 2) { break; }
             }
-            if (shortValue % 1 != 0)  shortValue = shortValue.toFixed(1);
-            newValue = shortValue+suffixes[suffixNum];
+            if (shortValue % 1 != 0) shortValue = shortValue.toFixed(1);
+            newValue = shortValue + suffixes[suffixNum];
         }
         return newValue;
     }
 
     function formatN(x) {
-        if(x>1e19){
+        x = parseInt(x)
+        if (x > 1e19) {
             return abbreviateNumber(x)
         } else {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
     }
     function updateButtons() {
-        let multi = (parseInt(multiplyBtn.getAttribute("multi")) || 1)
-
         for (let i = 0; i < clickers.length; i++) {
             let element = clickers[i]
-            let cost = parseFloat(element.getAttribute("cost")) * multi
-            let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0) * multi
-            element.innerHTML = "Buy " + formatN(multi) + "x " + element.getAttribute("name") + " clicker(s) (" + formatN(cost) + " clicks)"
+            let cost = parseFloat(element.getAttribute("cost"))
+            let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0)
+            element.innerHTML = "Buy 1x " + element.name + " clicker(s) (" + formatN(cost) + " clicks)"
             element.setAttribute("title", "Gives " + formatN(autoclicks) + " Auto Clicks")
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
@@ -66,18 +77,14 @@
     }
 
     function setupButtons() {
-        let multi = (parseInt(multiplyBtn.getAttribute("multi")) || 1)
         for (let i = 0; i < clickers.length; i++) {
             let element = clickers[i]
             element.insertAdjacentElement("afterend", document.createElement("div"))
-            let cost = (parseFloat(element.getAttribute("cost")) || 0) * multi
-            let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0) * multi
-            element.innerHTML += " (" + formatN(cost) + " clicks)"
-            element.setAttribute("title", "Gives " + formatN(autoclicks) + " auto clicks")
+            let cost = (parseFloat(element.getAttribute("cost")) || 0)
+            let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0)
+            element.innerHTML = "Buy 1x " + element.name + " clicker(s) (" + formatN(cost) + " clicks)"
+            element.setAttribute("title", "Gives " + formatN(autoclicks) + " Auto Clicks")
             element.onclick = function () {
-                let multi = (parseInt(multiplyBtn.getAttribute("multi")) || 1)
-                let cost = (parseInt(element.getAttribute("cost")) || 0) * multi
-                let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0) * multi
                 if (clicks >= cost) {
                     clicks -= cost
                     clicksPerSecond += autoclicks
@@ -89,7 +96,7 @@
         for (let i = 0; i < upgrades.length; i++) {
             let element = upgrades[i]
             let cost = parseInt(element.getAttribute("cost")) || 0
-            let rebirth = parseInt(element.getAttribute("rebirth")) || 0
+            let rebirths = parseInt(element.getAttribute("rebirths")) || 0
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
             } else {
@@ -97,7 +104,7 @@
             }
             element.innerHTML += " (" + formatN(cost) + " clicks)"
             element.onclick = function () {
-                if (rebirth > 0) {
+                if (rebirths > 0) {
                     if (clicks >= cost) {
                         clickmulti += 1
                         clicks = 0
@@ -106,23 +113,6 @@
                     }
                 }
             }
-        }
-
-        multiplyBtn.innerHTML = (parseInt(multiplyBtn.getAttribute("multi")) || 1) + "x clickers"
-
-        multiplyBtn.onclick = function () {
-            multiplyBtn.setAttribute("multi", (parseInt(multiplyBtn.getAttribute("multi")) || 1) * 10)
-
-            multiplyBtn.innerHTML = formatN(parseInt(multiplyBtn.getAttribute("multi")) || 1) + "x clickers"
-
-            let multi = parseInt(multiplyBtn.getAttribute("multi")) || 1
-            if (multi > 9999999) {
-                multiplyBtn.setAttribute("multi", 1)
-            }
-            multiplyBtn.innerHTML = formatN(parseInt(multiplyBtn.getAttribute("multi")) || 1) + "x clickers"
-
-            updateButtons()
-            update()
         }
     }
 
@@ -155,25 +145,34 @@
         clickmultiLabel.innerHTML = formatN(clickmulti) + "x Click Multi"
     }
 
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms))
-    }
-
     function update() {
         updateButtons()
         updateLabels()
     }
 
-    function gameLoop() {
-        if (clicksPerSecond > 0) {
-            clicks += (clickmulti)
-            update()
-        }
+    const start = Date.now()
 
-        gameLoopTime = (1000/(clicksPerSecond))
+    function gameLoop() {
+        clicks += clicksPerSecond/10
+
+        console.log((Date.now() - start) / 1000, clicks)
+
+        update()
+        setTimeout(gameLoop, 100)
     }
 
     function setup() {
+        let label = document.getElementById("clickers")
+        Clickers.reverse()
+        Clickers.forEach(item => {
+            let newElement = document.createElement("button")
+            newElement.setAttribute("autoclicks", item[1])
+            newElement.setAttribute("cost", item[2])
+            newElement.name = item[0]
+            newElement.classList="clicker"
+            label.insertAdjacentElement("afterend", newElement)
+        })
+
         setupButtons()
         clicks = (parseInt(getCookie("c")) || 0)
         clicksPerSecond = (parseInt(getCookie("cs")) || 0)
@@ -182,21 +181,13 @@
             clicks += clickmulti
             update()
         }
-        loop()
         update()
         window.addEventListener('beforeunload', (event) => {
             setCookie("c", clicks, 365)
             setCookie("cs", clicksPerSecond, 365)
             setCookie("cm", clickmulti, 365)
-            event.returnValue = '';
-          });
-    }
-
-    async function loop() {
-        while (true) {
-            gameLoop()
-            await sleep(gameLoopTime)
-        }
+        });
+        gameLoop()
     }
     // Code \\
     setup()
