@@ -35,6 +35,11 @@ html {
     border: none;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 button {
     border: none;
     background: var(--button-bg-1);
@@ -43,6 +48,14 @@ button {
     border-radius: 8px;
     font-size: .8rem;
     padding: 5px;
+}
+
+div.s5px {
+    height: 5px;
+}
+
+div.s10px {
+    height: 10px;
 }
 
 button:disabled {
