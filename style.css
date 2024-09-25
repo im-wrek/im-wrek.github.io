@@ -112,23 +112,6 @@ button.click {
     background-size: contain;
 }
 
-.games a .clicker {
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    padding: 30px;
-    background: rgb(60, 60, 60);
-    border: none;
-    border-radius: 8px;
-    animation: from 0.25s;
-    background-repeat: repeat;
-    background-attachment: local;
-    background-size: contain;
-    color: black;
-    background-image: url("./Images/clicker game.jpg");
-}
-
 .games a:hover {
     background: var(--button-bg-2);
     animation: to 0.25s;
