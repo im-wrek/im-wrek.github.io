@@ -21,7 +21,7 @@
     ]
 
     const Upgrades = [
-        ["Rebirth", [Rebirths = 1], 100000], // Format: ["Name", [Data], Cost] \\
+        ["Rebirth", {Rebirths: 1}, 100000, "Resets Clicks and Auto Clicks\n+1 Click Multi"], // Format: ["Name", [Data], #Cost, "Tooltip"] \\
     ]
     // Elements \\
     const clickmultiLabel = document.getElementById("clickMulti")
@@ -59,13 +59,28 @@
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
     }
+
+    let amtOfClickers = clickers.length
+    let amtOfUpgrades = upgrades.length
     function updateButtons() {
-        for (let i = 0; i < clickers.length; i++) {
+        for (let i = 0; i < amtOfClickers; i++) {
             let element = clickers[i]
             let cost = parseFloat(element.getAttribute("cost")) * multiplier
             let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0) * multiplier
             element.innerHTML = "Buy 1x " + element.name + " clicker(s) (" + formatN(cost) + " clicks)"
             element.title = "Gives " + formatN(autoclicks) + " Auto Clicks"
+            if (clicks >= cost) {
+                element.removeAttribute("disabled")
+            } else {
+                element.setAttribute("disabled", true)
+            }
+        }
+
+        for (let i = 0; i < amtOfUpgrades; i++) {
+            let element = upgrades[i]
+            let name = element.name
+            let cost = parseFloat(element.getAttribute("cost"))
+            element.innerHTML = "Buy " + name + " (" + formatN(cost) + " clicks)"
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
             } else {
@@ -78,10 +93,10 @@
         let label = document.getElementById("clickers")
         Clickers.reverse()
         Clickers.forEach(item => {
-            const name = item[0]
-            const autoclicks = item[1]
-            const cost = item[2]
-            const element = document.createElement("button")
+            let name = item[0]
+            let autoclicks = item[1]
+            let cost = item[2]
+            let element = document.createElement("button")
             element.setAttribute("cost", cost)
             element.setAttribute("autoclicks", autoclicks)
 
@@ -93,13 +108,47 @@
             element.insertAdjacentHTML("afterend", "<div class='s5px'></div>")
 
             element.onclick = function () {
-                if (clicks > cost * multiplier) {
+                if (clicks >= cost * multiplier) {
                     clicks -= cost * multiplier
                     clicksPerSecond += autoclicks * multiplier
                     update()
                 }
             }
         })
+
+        amtOfClickers = clickers.length
+
+        label = document.getElementById("upgrades")
+        Upgrades.reverse()
+        Upgrades.forEach(item => {
+            let name = item[0]
+            let data = item[1]
+            let cost = item[2]
+            let tooltip = item[3]
+            let element = document.createElement("button")
+            element.setAttribute("cost", cost)
+
+            element.name = name
+            element.classList = "upgrade"
+            element.title = tooltip
+            element.innerHTML = "Buy " + name + " (" + formatN(cost) + " clicks)"
+            label.insertAdjacentElement("afterend", element)
+            element.insertAdjacentHTML("afterend", "<div class='s5px'></div>")
+
+            element.onclick = function () {
+                let rebirths = data.Rebirths
+                if (clicks >= cost){
+                    clicks -= cost
+                    if (rebirths){
+                        clicksPerSecond = 0
+                        clickmulti += rebirths
+                        clicks = 0
+                    }
+                }
+            }
+        })
+
+        amtOfUpgrades = upgrades.length
 
         let styleSheet = document.getElementById('stylesheet')
         styleBtn.onclick = function () {

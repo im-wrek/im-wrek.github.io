@@ -1,8 +1,10 @@
 function loadNavbar() {
-    document.body.insertAdjacentHTML('beforebegin', `<div class="topnav">
-    <a class="active" href="./index.html">Home</a>
-    <a class="active" href="./index.html#Games">Games</a>
-    <a class="active" href="./index.html#Tools">Tools</a>
+    document.body.insertAdjacentHTML('beforebegin', `
+<div class="topnav">
+    <a href="https://im-wrek.github.io/">Home</a>
+    <a href="https://im-wrek.github.io/#Games">Games</a>
+    <a href="https://im-wrek.github.io/#Tools">Tools</a>
+    <a href="https://im-wrek.github.io/Changelog">Changelog</a>
 </div>`)
 }
 

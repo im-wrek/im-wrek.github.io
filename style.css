@@ -95,7 +95,7 @@ button.click {
 }
 
 .topnav a:hover {
-    background-color: white;
+    background-color: grey;
     color: black;
 }
 
