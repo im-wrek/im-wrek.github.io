@@ -30,6 +30,7 @@ function loadHead() {
 function check() {
     if (document.body) {
         loadNavbar()
+        loadHead()
     } else {
         setTimeout(check)
     }
