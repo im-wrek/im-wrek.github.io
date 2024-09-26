@@ -105,7 +105,7 @@ button.click {
 }
 
 .games {
-    overflow:visible;
+    overflow: visible;
     display: block;
     overflow-wrap: anywhere;
 }
