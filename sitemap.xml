@@ -7,17 +7,22 @@
 
 
 <url>
-  <loc>https://im-wrek.github.io/</loc>
+  <loc>https://im-wrek.github.io/home</loc>
   <lastmod>2024-09-26T01:06:50+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://im-wrek.github.io/Games/Clicker/</loc>
+  <loc>https://im-wrek.github.io/</loc>
+  <lastmod>2024-09-26T01:06:50+00:00</lastmod>
+  <priority>0.90</priority>
+</url>
+<url>
+  <loc>https://im-wrek.github.io/experiences/clicker/</loc>
   <lastmod>2024-09-26T01:06:50+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://im-wrek.github.io/Games/Snake/</loc>
+  <loc>https://im-wrek.github.io/experiences/snake/</loc>
   <lastmod>2024-09-26T01:06:50+00:00</lastmod>
   <priority>0.80</priority>
 </url>
