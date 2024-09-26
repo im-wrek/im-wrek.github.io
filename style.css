@@ -104,13 +104,13 @@ button.click {
     color: white;
 }
 
-.games {
+.experiences {
     overflow: visible;
     display: block;
     overflow-wrap: anywhere;
 }
 
-.games a {
+.experiences a {
     font-weight: bold;
     color: white;
     text-decoration: none;
@@ -125,12 +125,12 @@ button.click {
     background-size: contain;
 }
 
-.games a:hover {
+.experiences a:hover {
     background: var(--button-bg-2);
     animation: to 0.25s;
 }
 
-.games a:not(:disabled):active {
+.experiences a:not(:disabled):active {
     background: var(--button-bg-1);
     animation: from 0.25s;
 }
