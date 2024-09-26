@@ -85,6 +85,18 @@ button.click {
     display: block;
 }
 
+a {
+    color: darkcyan;
+}
+
+a:visited {
+    color: cyan;
+}
+
+a:active {
+    color: white;
+}
+
 .topnav a {
     float: left;
     color: white;
