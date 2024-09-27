@@ -68,32 +68,44 @@
     let amtOfClickers = clickers.length
     let amtOfUpgrades = upgrades.length
     function updateButtons() {
-        for (let i = 0; i < amtOfClickers; i++) {
-            let element = clickers[i]
-            let cost = parseFloat(element.getAttribute("cost")) * multiplier
-            let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0) * multiplier
-            element.innerHTML = "Buy " + formatN(multiplier) + "x " + element.name + " clicker(s) (" + formatN(cost) + " clicks)"
-            element.title = "Gives " + formatN(autoclicks) + " Auto Clicks"
+        Clickers.forEach(item => {
+            let name = item[0]
+            let autoclicks = item[1] * multiplier
+            let cost = item[2] * multiplier
+            let element = item[item.length]
+
+            element.innerHTML = "Buy " + formatN(multiplier) + "x " + name + " clicker" + (multiplier > 1 && "s" || "") + " (" + formatN(cost) + " clicks)"
+            element.title = "+ " + formatN(autoclicks) + " cps"
+            
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
             } else {
                 element.setAttribute("disabled", true)
             }
-        }
+        })
+        
+        Upgrades.forEach(item => {
+            let name = item[0]
+            let data = item[1]
+            let cost = item[2]
+            let tooltip = item[3]
+            let element = item[item.length]
 
-        for (let i = 0; i < amtOfUpgrades; i++) {
-            let element = upgrades[i]
-            let name = element.name
-            let cost = parseFloat(element.getAttribute("cost"))
+            if (data.DynamicPricing === true){
+                cost *= data.DynamicPriceMulti * clickmulti
+            }
+
             element.innerHTML = "Buy " + name + " (" + formatN(cost) + " clicks)"
+            element.title = "+ " + formatN(autoclicks) + " cps"
+            
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
             } else {
                 element.setAttribute("disabled", true)
             }
-        }
+        })
 
-        let digits = Math.trunc(clicks).toString().length - 1
+        let digits = (clicks).toString().length - 1
         if ((multiplier.toString().length) > (digits)) {
             multiplier = 1
         }
@@ -108,8 +120,6 @@
             let autoclicks = item[1]
             let cost = item[2]
             let element = document.createElement("button")
-            element.setAttribute("cost", cost)
-            element.setAttribute("autoclicks", autoclicks)
 
             element.name = name
             element.classList = "clicker"
@@ -125,6 +135,8 @@
                     update()
                 }
             }
+
+            item[item.length + 1] = element
         })
 
         amtOfClickers = clickers.length
@@ -137,7 +149,6 @@
             let cost = item[2]
             let tooltip = item[3]
             let element = document.createElement("button")
-            element.setAttribute("cost", cost)
 
             element.name = name
             element.classList = "upgrade"
@@ -157,6 +168,7 @@
                     }
                 }
             }
+            item[item.length + 1] = element
         })
 
         amtOfUpgrades = upgrades.length
@@ -172,7 +184,7 @@
         }
 
         multiBtn.onclick = function () {
-            let digits = Math.trunc(clicks).toString().length - 1
+            let digits = (clicks).toString().length - 1
             multiplier *= 10
             if ((multiplier.toString().length) > (digits)) {
                 multiplier = 1
@@ -224,7 +236,7 @@
     const start = Date.now()
 
     function gameLoop() {
-        clicks += (clicksPerSecond / 10) * clickmulti
+        clicks += ((clicksPerSecond / 10) * clickmulti)
 
         update()
         setTimeout(gameLoop, 100)
@@ -232,9 +244,9 @@
 
     function setup() {
         setupButtons()
-        clicks = (Math.trunc(getCookie("c")) || 0)
-        clicksPerSecond = (Math.trunc(getCookie("cs")) || 0)
-        clickmulti = (Math.trunc(getCookie("cm")) || 1)
+        clicks = ((getCookie("c")) || 0)
+        clicksPerSecond = ((getCookie("cs")) || 0)
+        clickmulti = ((getCookie("cm")) || 1)
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
