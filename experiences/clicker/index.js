@@ -149,7 +149,7 @@
             if ((multiplier.toString().length) > (digits + 2)) {
                 multiplier = 1
             }
-            multiBtn.innerHTML = "Buy " + multiplier + "x"
+            multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
             update()
         }
     }
