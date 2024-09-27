@@ -93,6 +93,10 @@
             }
         }
 
+        let digits = parseInt(clicks).toString().length
+        if ((multiplier.toString().length) > (digits)) {
+            multiplier = 1
+        }
         multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
     }
 
