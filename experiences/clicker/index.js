@@ -4,6 +4,7 @@
     var clicksPerSecond = 0
     var clickmulti = 1
     var multiplier = 1
+    var useNotation = false
 
     const Clickers = [
         ["Bronze", 1, 10],
@@ -31,15 +32,37 @@
     const clickBtn = document.getElementById("click")
     const styleBtn = document.getElementById("style")
     const multiBtn = document.getElementById("multiply")
+    const notationBtn = document.getElementById("notation")
 
     const clickLabel = document.getElementById("clicks")
     const autoclicksLabel = document.getElementById("autoclicks")
     // Functions \\
+    function abbrev(value) {
+        let newValue = value;
+        const suffixes = ["", "K", "M", "B", "T", "Qd", "Qn", "Sx", "Sep", "Oct", "N", "D", "UD", "DD", "TD", "QtD", "QnD", "SxD", "SepD", "OctD", "ND", "V", "UV", "DV", "TV", "QtV", "QnV", "SxV", "SepV", "OctV", "NV", "Tg", "UTg", "DTg", "TTg", "QtTg", "QnTg", "SxTg", "SepTg", "OctTg", "NTg", "QtR", "UQtR", "DQtR", "TQtR", "QtQtR", "QnQtR", "SxQtR", "SepQtR", "OctQtR", "NQtR", "QnR", "UQnR", "DQnR", "TQnR", "QtQnR", "QnQnR", "SxQnR", "SepQnR", "OctQnR", "NQnR", "SxR", "USxR", "DSxR", "TSxR", "QtSxR", "QnSxR", "SxSxR", "SepSxR", "OctSxR", "NSxR", "SepR", "USepR", "DSepR", "TSepR", "QtSepR", "QnSepR", "SxSepR", "SepSepR", "OctSepR", "NSepR", "OctR", "UOctR", "DOctR", "TOctR", "QtOctR", "QnOctR", "SxOctR", "SepOctR", "OctOctR", "NOctR", "NR", "UnR", "DnR", "TnR", "QtnR", "QnnR", "SxnR", "SepnR", "OctnR", "NnR", "C", "CU", "CD", "CT", "CQt", "CQn", "CSx", "CSep", "COct", "CN", "Cd", "CUd", "CDd", "CTd", "CQtd", "CQnd", "CSxd", "CSepd", "COctd", "CNd", "CV", "CUV", "CDV", "CTV", "CQtV", "CQnV", "CSxV", "CSepV", "COctV", "CNV", "CTg", "CUTg", "CDTg", "CDTg", "CQtTg", "CQnTg", "CSxTg", "CSepTg", "COctTg", "CNTg", "CQtR", "CUQtR", "CDQtR", "CTQtR", "CQtQtR", "CQnQtR", "CSxQtR", "CSepQtR", "COctQtR", "CNQtR", "CQnR", "CUQnR", "CDQnR", "CTQnR", "CQtQnR", "CQnQnR", "CSxQnR", "CSepQnR", "COctQnR", "CNQnR", "CSxR", "CUSxR", "CDSxR", "CTSxR", "CQtSxR", "CQnSxR", "CSxSxR", "CSepSxR", "COctSxR", "CNSxR", "CSepR", "CUSepR", "CDSepR", "CTSepR", "CQtSepR", "CQnSepR", "CSxSepR", "CSepSepR", "COctSepR", "CNSepR", "COctR", "CUOctR", "CDOctR", "CTOctR", "CQtOctR", "CQnOctR", "CSxOctR", "CSepOctR", "COctOctR", "CNOctR", "CnR", "CUnR", "CDnR", "CTnR", "CQtnR", "CQnnR", "CSxnR", "CSepnR", "COctnR", "CNnR", "DC", "DCU", "DCD", "DCT", "DCQt", "DCQn", "DCSx", "DCSep", "DCOct", "DCN", "DCd", "DCUd", "DCDd", "DCTd", "DCQtd", "DCQnd", "DCSxd", "DCSepd", "DCOctd", "DCNd", "DCV", "DCUV", "DCDV", "DCTV", "DCQtV", "DCQnV", "DCSxV", "DCSepV", "DCOctV", "DCNV", "DCTg", "DCUTg", "DCDTg", "DCDTg", "DCQtTg", "DCQnTg", "DCSxTg", "DCSepTg", "DCOctTg", "DCNTg", "DCQtR", "DCUQtR", "DCDQtR", "DCTQtR", "DCQtQtR", "DCQnQtR", "DCSxQtR", "DCSepQtR", "DCOctQtR", "DCNQtR", "DCQnR", "DCUQnR", "DCDQnR", "DCTQnR", "DCQtQnR", "DCQnQnR", "DCSxQnR", "DCSepQnR", "DCOctQnR", "DCNQnR", "DCSxR", "DCUSxR", "DCDSxR", "DCTSxR", "DCQtSxR", "DCQnSxR", "DCSxSxR", "DCSepSxR", "DCOctSxR", "DCNSxR", "DCSepR", "DCUSepR", "DCDSepR", "DCTSepR", "DCQtSepR", "DCQnSepR", "DCSxSepR", "DCSepSepR", "DCOctSepR", "DCNSepR", "DCOctR", "DCUOctR", "DCDOctR", "DCTOctR", "DCQtOctR", "DCQnOctR", "DCSxOctR", "DCSepOctR", "DCOctOctR", "DCNOctR", "DCnR", "DCUnR", "DCDnR", "DCTnR", "DCQtnR", "DCQnnR", "DCSxnR", "DCSepnR", "DCOctnR", "DCNnR", "TC"];
+        let suffixNum = 0;
+        while (newValue >= 1000) {
+            newValue /= 1000;
+            suffixNum++;
+        }
+
+        newValue = newValue.toPrecision(3);
+
+        newValue += suffixes[suffixNum];
+        return newValue;
+    }
+
     function formatN(x) {
-        return Math.round(x).toLocaleString('en-US', {
-            notation: 'compact',
-            compactDisplay: 'short'
-        })
+        if (!(typeof (x) === "number")) { return; }
+        if (useNotation === true) {
+            return x.toExponential()
+        } else {
+            if (x.toString().length > 7) {
+                return abbrev(x)
+            } else {
+                return x.toLocaleString()
+            }
+        }
     }
 
     let amtOfClickers = clickers.length
@@ -69,6 +92,8 @@
                 element.setAttribute("disabled", true)
             }
         }
+        
+        multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
     }
 
     function setupButtons() {
@@ -144,12 +169,18 @@
         }
 
         multiBtn.onclick = function () {
-            let digits = parseInt(clicks)
+            let digits = parseInt(clicks).toString().length
             multiplier *= 10
+            console.log(multiplier.toString().length, digits)
             if ((multiplier.toString().length) > (digits)) {
                 multiplier = 1
             }
             multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
+            update()
+        }
+
+        notationBtn.onclick = function () {
+            useNotation = !useNotation
             update()
         }
     }
