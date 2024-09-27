@@ -165,7 +165,7 @@
         multiBtn.onclick = function () {
             let digits = toString(parseInt(clicks)).length
             multiplier *= 10
-            if (multiplier / (digits/10) >= digits) {
+            if ((multiplier.toString().length) > (digits + 2)) {
                 multiplier = 1
             }
             multiBtn.innerHTML = "Buy " + multiplier + "x"
