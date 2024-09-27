@@ -22,7 +22,7 @@
     ]
 
     const Upgrades = [
-        ["Rebirth", {Rebirths: 1}, 100000, "Resets Clicks and Auto Clicks\n+1 Click Multi"], // Format: ["Name", [Data], #Cost, "Tooltip"] \\
+        ["Rebirth", { Rebirths: 1 }, 100000, "Resets Clicks and Auto Clicks\n+1 Click Multi"], // Format: ["Name", [Data], #Cost, "Tooltip"] \\
     ]
     // Elements \\
     const clickmultiLabel = document.getElementById("clickMulti")
@@ -35,30 +35,11 @@
     const clickLabel = document.getElementById("clicks")
     const autoclicksLabel = document.getElementById("autoclicks")
     // Functions \\
-    function abbreviateNumber(value) {
-        var newValue = value;
-        if (value >= 1000) {
-            var suffixes = ["", "K", "M", "B", "T", "QA", "QI", "SX", "SP", "OC", "NO", "DC", "UD", "DD", "TD", "QAD", "QID", "SXD", "SPD", "OCD", "NOD", "VG", "UVG"];
-            var suffixNum = Math.floor(("" + value).length / 3);
-            var shortValue = '';
-            for (var precision = 2; precision >= 1; precision--) {
-                shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
-                var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
-                if (dotLessShortValue.length <= 2) { break; }
-            }
-            if (shortValue % 1 != 0) shortValue = shortValue.toFixed(1);
-            newValue = shortValue + suffixes[suffixNum];
-        }
-        return newValue;
-    }
-
     function formatN(x) {
-        x = parseInt(x)
-        if (x > 1e19) {
-            return abbreviateNumber(x)
-        } else {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        }
+        return Math.round(x).toLocaleString('en-US', {
+            notation: 'compact',
+            compactDisplay: 'short'
+        })
     }
 
     let amtOfClickers = clickers.length
@@ -138,9 +119,9 @@
 
             element.onclick = function () {
                 let rebirths = data.Rebirths
-                if (clicks >= cost){
+                if (clicks >= cost) {
                     clicks -= cost
-                    if (rebirths){
+                    if (rebirths) {
                         clicksPerSecond = 0
                         clickmulti += rebirths
                         clicks = 0
@@ -163,7 +144,7 @@
         }
 
         multiBtn.onclick = function () {
-            let digits = toString(parseInt(clicks)).length
+            let digits = parseInt(clicks)
             multiplier *= 10
             if ((multiplier.toString().length) > (digits + 2)) {
                 multiplier = 1
