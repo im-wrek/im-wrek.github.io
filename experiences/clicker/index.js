@@ -23,7 +23,7 @@
     ]
 
     const Upgrades = [
-        ["Rebirth", { Rebirths: 1 }, 100000, "Resets Clicks and Auto Clicks\n+1 Click Multi"], // Format: ["Name", [Data], #Cost, "Tooltip"] \\
+        ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceMulti: 10 }, 100000, "Resets Clicks and Auto Clicks\n+1 Click Multi"], // Format: ["Name", [Data], #Cost, "Tooltip"] \\
     ]
     // Elements \\
     const clickmultiLabel = document.getElementById("clickMulti")
@@ -93,7 +93,7 @@
             }
         }
 
-        let digits = parseInt(clicks).toString().length
+        let digits = Math.trunc(clicks).toString().length - 1
         if ((multiplier.toString().length) > (digits)) {
             multiplier = 1
         }
@@ -172,7 +172,7 @@
         }
 
         multiBtn.onclick = function () {
-            let digits = parseInt(clicks).toString().length
+            let digits = Math.trunc(clicks).toString().length - 1
             multiplier *= 10
             if ((multiplier.toString().length) > (digits)) {
                 multiplier = 1
@@ -232,9 +232,9 @@
 
     function setup() {
         setupButtons()
-        clicks = (parseInt(getCookie("c")) || 0)
-        clicksPerSecond = (parseInt(getCookie("cs")) || 0)
-        clickmulti = (parseInt(getCookie("cm")) || 1)
+        clicks = (Math.trunc(getCookie("c")) || 0)
+        clicksPerSecond = (Math.trunc(getCookie("cs")) || 0)
+        clickmulti = (Math.trunc(getCookie("cm")) || 1)
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
