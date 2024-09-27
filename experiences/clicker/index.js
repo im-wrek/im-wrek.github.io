@@ -49,7 +49,7 @@
             let element = clickers[i]
             let cost = parseFloat(element.getAttribute("cost")) * multiplier
             let autoclicks = (parseFloat(element.getAttribute("autoclicks")) || 0) * multiplier
-            element.innerHTML = "Buy 1x " + element.name + " clicker(s) (" + formatN(cost) + " clicks)"
+            element.innerHTML = "Buy " + formatN(multiplier) + "x " + element.name + " clicker(s) (" + formatN(cost) + " clicks)"
             element.title = "Gives " + formatN(autoclicks) + " Auto Clicks"
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
@@ -146,7 +146,7 @@
         multiBtn.onclick = function () {
             let digits = parseInt(clicks)
             multiplier *= 10
-            if ((multiplier.toString().length) > (digits + 2)) {
+            if ((multiplier.toString().length) > (digits)) {
                 multiplier = 1
             }
             multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
