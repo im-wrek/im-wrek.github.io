@@ -23,7 +23,7 @@
     ]
 
     const Upgrades = [
-        ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceMulti: 10 }, 100000, "Resets Clicks and Auto Clicks\n+1 Click Multi"], // Format: ["Name", [Data], #Cost, "Tooltip"] \\
+        ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceMulti: 10 }, 10000, "Resets Clicks and Auto Clicks\n+1 Click Multi"], // Format: ["Name", [Data], #Cost, "Tooltip"] \\
     ]
     // Elements \\
     const clickmultiLabel = document.getElementById("clickMulti")
@@ -65,14 +65,12 @@
         }
     }
 
-    let amtOfClickers = clickers.length
-    let amtOfUpgrades = upgrades.length
     function updateButtons() {
         Clickers.forEach(item => {
             let name = item[0]
             let autoclicks = item[1] * multiplier
             let cost = item[2] * multiplier
-            let element = item[item.length]
+            let element = item[item.length-1]
 
             element.innerHTML = "Buy " + formatN(multiplier) + "x " + name + " clicker" + (multiplier > 1 && "s" || "") + " (" + formatN(cost) + " clicks)"
             element.title = "+ " + formatN(autoclicks) + " cps"
@@ -89,14 +87,13 @@
             let data = item[1]
             let cost = item[2]
             let tooltip = item[3]
-            let element = item[item.length]
+            let element = item[item.length-1]
 
             if (data.DynamicPricing === true){
                 cost *= data.DynamicPriceMulti * clickmulti
             }
 
             element.innerHTML = "Buy " + name + " (" + formatN(cost) + " clicks)"
-            element.title = "+ " + formatN(autoclicks) + " cps"
             
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
@@ -139,8 +136,6 @@
             item[item.length + 1] = element
         })
 
-        amtOfClickers = clickers.length
-
         label = document.getElementById("upgrades")
         Upgrades.reverse()
         Upgrades.forEach(item => {
@@ -169,9 +164,8 @@
                 }
             }
             item[item.length + 1] = element
+            console.log(item)
         })
-
-        amtOfUpgrades = upgrades.length
 
         let styleSheet = document.getElementById('stylesheet')
         styleBtn.onclick = function () {
