@@ -57,7 +57,7 @@
         if (useNotation === true) {
             return x.toExponential()
         } else {
-            if (x.toString().length > 7) {
+            if (x.toString().length >= 7) {
                 return abbrev(x)
             } else {
                 return x.toLocaleString()
