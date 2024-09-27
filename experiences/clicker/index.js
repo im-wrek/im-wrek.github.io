@@ -92,7 +92,7 @@
                 element.setAttribute("disabled", true)
             }
         }
-        
+
         multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
     }
 
@@ -160,7 +160,6 @@
         let styleSheet = document.getElementById('stylesheet')
         styleBtn.onclick = function () {
             let href = styleSheet.getAttribute("href")
-            console.log(href)
             if (href == "") {
                 styleSheet.setAttribute("href", "https://im-wrek.github.io/style.css")
             } else {
@@ -171,7 +170,6 @@
         multiBtn.onclick = function () {
             let digits = parseInt(clicks).toString().length
             multiplier *= 10
-            console.log(multiplier.toString().length, digits)
             if ((multiplier.toString().length) > (digits)) {
                 multiplier = 1
             }

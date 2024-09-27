@@ -123,7 +123,7 @@
 
         // left arrow key
         let key = e.key.toLowerCase()
-        console.log(key)
+        
         if (key === "a" || key === "arrowleft" && snake.dx === 0) {
             snake.dx = -grid;
             snake.dy = 0;
