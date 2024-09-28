@@ -245,7 +245,7 @@
             update()
         }
         update()
-        window.addEventListener('beforeunload', (event) => {
+        window.addEventListener('beforeunload', () => {
             setCookie("c", Math.round(clicks), 365)
             setCookie("cs", clicksPerSecond, 365)
             setCookie("cm", clickmulti, 365)
