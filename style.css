@@ -47,8 +47,8 @@ button {
     color: white;
     animation: from 0.25s;
     border-radius: 8px;
-    font-size: .8rem;
-    padding: 5px;
+    font-size: .65rem;
+    padding: 3px;
 }
 
 div.s5px {
