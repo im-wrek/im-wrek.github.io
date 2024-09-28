@@ -229,7 +229,7 @@
     const start = Date.now()
 
     function gameLoop() {
-        clicks += ((clicksPerSecond / 10) * clickmulti)
+        clicks += Math.trunc((clicksPerSecond / 10) * clickmulti)
 
         update()
         setTimeout(gameLoop, 100)
@@ -246,7 +246,7 @@
         }
         update()
         window.addEventListener('beforeunload', (event) => {
-            setCookie("c", clicks, 365)
+            setCookie("c", Math.trunc(clicks), 365)
             setCookie("cs", clicksPerSecond, 365)
             setCookie("cm", clickmulti, 365)
         });
