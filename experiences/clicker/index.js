@@ -234,9 +234,9 @@
 
     function setup() {
         setupButtons()
-        clicks = ((getCookie("c")) || 0)
-        clicksPerSecond = ((getCookie("cs")) || 0)
-        clickmulti = ((getCookie("cm")) || 1)
+        clicks = Math.trunc(parseFloat((getCookie("c")) || 0))
+        clicksPerSecond = Math.trunc(parseFloat((getCookie("cs")) || 0))
+        clickmulti = Math.trunc(parseFloat((getCookie("cm")) || 1))
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
