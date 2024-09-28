@@ -68,7 +68,7 @@
 
     function getDigits(x) {
         if (!(typeof (x) === "number")) { return 0; }
-        return Math.trunc(x).toString().length
+        return (Math.trunc(x).toString().length)
     }
 
     function updateButtons() {
@@ -107,7 +107,7 @@
             }
         })
 
-        if ((multiplier.toString().length) > (getDigits(clicks))) {
+        if ((multiplier.toString().length) > (getDigits(clicks) - 1)) {
             multiplier = 1
         }
         multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
