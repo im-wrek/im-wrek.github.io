@@ -4,9 +4,7 @@ function load() {
     document.addEventListener("keyup", (ev) => {
         let key = ev.key.toLowerCase()
 
-        console.log(key)
-
-        if (key === "slash") {
+        if (key === "/") {
             window.location.href = "https://classroom.google.com/";
         }
     })
