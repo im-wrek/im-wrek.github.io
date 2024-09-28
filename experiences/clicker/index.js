@@ -253,7 +253,7 @@
             if (document.hidden) {
                 lastTabbedInTime = Date.now()
             } else {
-                clicks += ((Date.now() - lastTabbedInTime) / 1000) * clicksPerSecond
+                clicks += Math.trunc(((Date.now() - lastTabbedInTime) / 1000) * clicksPerSecond)
             }
         }, false);
         gameLoop()
