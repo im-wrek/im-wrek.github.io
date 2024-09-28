@@ -164,7 +164,6 @@
                 }
             }
             item[item.length + 1] = element
-            console.log(item)
         })
 
         let styleSheet = document.getElementById('stylesheet')
