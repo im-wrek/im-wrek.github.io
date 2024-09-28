@@ -258,7 +258,7 @@
             isFocused = !isFocused
             if (isFocused === true) {
                 let c = (((Date.now() - lastFocused) / 1000 * clicksPerSecond) * clickmulti)
-                console.log(c)
+                
                 clicks += c
             } else {
                 lastFocused = Date.now()
