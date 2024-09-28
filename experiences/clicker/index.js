@@ -57,7 +57,7 @@
         if (useNotation === true) {
             return x.toExponential()
         } else {
-            if (x.toString().length >= 7) {
+            if (x >= 1e12-1) {
                 return abbrev(x)
             } else {
                 return x.toLocaleString()
@@ -86,7 +86,6 @@
             let name = item[0]
             let data = item[1]
             let cost = item[2]
-            let tooltip = item[3]
             let element = item[item.length-1]
 
             if (data.DynamicPricing === true){
@@ -102,7 +101,7 @@
             }
         })
 
-        let digits = (clicks).toString().length - 1
+        let digits = Math.trunc(clicks).toString().length - 1
         if ((multiplier.toString().length) > (digits)) {
             multiplier = 1
         }
@@ -126,9 +125,9 @@
             element.insertAdjacentHTML("afterend", "<div class='s5px'></div>")
 
             element.onclick = function () {
-                if (clicks >= cost * multiplier) {
-                    clicks -= cost * multiplier
-                    clicksPerSecond += autoclicks * multiplier
+                if (clicks >= (cost * multiplier)) {
+                    clicks -= (cost * multiplier)
+                    clicksPerSecond += (autoclicks * multiplier)
                     update()
                 }
             }
@@ -226,10 +225,8 @@
         updateLabels()
     }
 
-    const start = Date.now()
-
     function gameLoop() {
-        clicks += Math.round((clicksPerSecond / 10) * clickmulti)
+        clicks += Math.trunc((clicksPerSecond / 10) * clickmulti)
 
         update()
         setTimeout(gameLoop, 100)
@@ -246,7 +243,7 @@
         }
         update()
         window.addEventListener('beforeunload', () => {
-            setCookie("c", Math.round(clicks), 365)
+            setCookie("c", Math.trunc(clicks), 365)
             setCookie("cs", clicksPerSecond, 365)
             setCookie("cm", clickmulti, 365)
         });
