@@ -6,4 +6,6 @@ document.addEventListener("keyup", (ev) => {
     }
 })
 
-document.body.insertAdjacentHTML("beforeend", "<footer>Click Backslash '\' at any time to go to Google Classroom")
+document.onload = function(){
+    document.body.insertAdjacentHTML("beforeend", "<footer>Click Backslash '\' at any time to go to Google Classroom")
+}
