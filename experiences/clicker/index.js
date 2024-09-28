@@ -54,10 +54,11 @@
 
     function formatN(x) {
         if (!(typeof (x) === "number")) { return; }
+        x = Math.trunc(x)
         if (useNotation === true) {
             return x.toExponential()
         } else {
-            if (x >= 1e12-1) {
+            if (x >= 1e12 - 1) {
                 return abbrev(x)
             } else {
                 return x.toLocaleString()
@@ -65,35 +66,40 @@
         }
     }
 
+    function getDigits(x) {
+        if (!(typeof (x) === "number")) { return 0; }
+        return Math.trunc(x).toString().length
+    }
+
     function updateButtons() {
         Clickers.forEach(item => {
             let name = item[0]
             let autoclicks = item[1] * multiplier
             let cost = item[2] * multiplier
-            let element = item[item.length-1]
+            let element = item[item.length - 1]
 
             element.innerHTML = "Buy " + formatN(multiplier) + "x " + name + " clicker" + (multiplier > 1 && "s" || "") + " (" + formatN(cost) + " clicks)"
             element.title = "+ " + formatN(autoclicks) + " cps"
-            
+
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
             } else {
                 element.setAttribute("disabled", true)
             }
         })
-        
+
         Upgrades.forEach(item => {
             let name = item[0]
             let data = item[1]
             let cost = item[2]
-            let element = item[item.length-1]
+            let element = item[item.length - 1]
 
-            if (data.DynamicPricing === true){
+            if (data.DynamicPricing === true) {
                 cost *= data.DynamicPriceMulti * clickmulti
             }
 
             element.innerHTML = "Buy " + name + " (" + formatN(cost) + " clicks)"
-            
+
             if (clicks >= cost) {
                 element.removeAttribute("disabled")
             } else {
@@ -101,8 +107,7 @@
             }
         })
 
-        let digits = Math.trunc(clicks).toString().length - 1
-        if ((multiplier.toString().length) > (digits)) {
+        if ((multiplier.toString().length) > (getDigits(clicks))) {
             multiplier = 1
         }
         multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
@@ -176,9 +181,7 @@
         }
 
         multiBtn.onclick = function () {
-            let digits = (clicks).toString().length - 1
-            multiplier *= 10
-            if ((multiplier.toString().length) > (digits)) {
+            if ((multiplier.toString().length) > (getDigits(clicks))) {
                 multiplier = 1
             }
             multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
@@ -226,7 +229,7 @@
     }
 
     function gameLoop() {
-        clicks += Math.trunc((clicksPerSecond / 10) * clickmulti)
+        clicks += ((clicksPerSecond / 10) * clickmulti)
 
         update()
         setTimeout(gameLoop, 100)
@@ -234,28 +237,34 @@
 
     function setup() {
         setupButtons()
-        clicks = Math.trunc(parseFloat((getCookie("c")) || 0))
-        clicksPerSecond = Math.trunc(parseFloat((getCookie("cs")) || 0))
-        clickmulti = Math.trunc(parseFloat((getCookie("cm")) || 1))
+        clicks = (parseFloat((getCookie("c")) || 0))
+        clicksPerSecond = (parseFloat((getCookie("cs")) || 0))
+        clickmulti = (parseFloat((getCookie("cm")) || 1))
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
         }
         update()
         window.addEventListener('beforeunload', () => {
-            setCookie("c", Math.trunc(clicks), 365)
+            setCookie("c", clicks, 365)
             setCookie("cs", clicksPerSecond, 365)
             setCookie("cm", clickmulti, 365)
         });
 
-        let lastTabbedInTime
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) {
-                lastTabbedInTime = Date.now()
+        var isFocused = true
+        var lastFocused = 0
+
+        document.addEventListener("visibilitychange", (doc, ev) => {
+            isFocused = !isFocused
+            if (isFocused === true) {
+                let c = (((Date.now() - lastFocused) / 1000 * clicksPerSecond) * clickmulti)
+                console.log(c)
+                clicks += c
             } else {
-                clicks += Math.trunc(((Date.now() - lastTabbedInTime) / 1000) * clicksPerSecond)
+                lastFocused = Date.now()
             }
-        }, false);
+        }, false) // Eliminates need for a worker \\
+
         gameLoop()
     }
     // Code \\
