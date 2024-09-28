@@ -107,7 +107,7 @@
             }
         })
 
-        if ((multiplier.toString().length) > (getDigits(clicks) - 1)) {
+        if (getDigits(multiplier) > (getDigits(clicks) + 1)) {
             multiplier = 1
         }
         multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
@@ -181,7 +181,7 @@
         }
 
         multiBtn.onclick = function () {
-            if ((multiplier.toString().length) > (getDigits(clicks))) {
+            if (getDigits(multiplier) > (getDigits(clicks) + 1)) {
                 multiplier = 1
             }
             multiBtn.innerHTML = "Buy " + formatN(multiplier) + "x"
