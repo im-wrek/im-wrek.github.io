@@ -31,8 +31,6 @@
     ]
     // Elements \\
     const clickmultiLabel = document.getElementById("clickMulti")
-    const clickers = document.getElementsByClassName("clicker")
-    const upgrades = document.getElementsByClassName("upgrade")
     const clickBtn = document.getElementById("click")
     const styleBtn = document.getElementById("style")
     const multiBtn = document.getElementById("multiply")
