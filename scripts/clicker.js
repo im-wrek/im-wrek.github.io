@@ -272,6 +272,7 @@
         clickmulti = (parseFloat((getCookie("cm")) || 1))
         titleId = (parseFloat((getCookie("ti")) || 1))
         useNotation = new Boolean(getCookie("nt" || false))
+        console.log(useNotation)
 
         clickBtn.onclick = function () {
             clicks += clickmulti
