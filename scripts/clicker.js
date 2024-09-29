@@ -41,7 +41,7 @@
     // Format: ["Name", [Options], Cost, "Tooltip"] \\
     const Upgrades = [
         ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceCriteria: "clicks" }, 10000, "Resets Clicks and Auto Clicks (you keep title)\n+1 Click Multi"],
-        ["Upgrade Title", { DynamicPricing: true, DynamicPriceCriteria: "title" }, 100000, "Upgrades your title"],
+        ["Upgrade Title", { GiveTitle: true, DynamicPricing: true, DynamicPriceCriteria: "title" }, 100000, "Upgrades your title"],
     ]
 
     // Requirements: Clicks, Rebirths, TitleId
@@ -183,9 +183,20 @@
             element.insertAdjacentHTML("afterend", "<div class='s5px'></div>")
 
             element.onclick = function () {
+                var cost = cost
+                if (data.DynamicPricing === true) {
+                    cost *= (data.DynamicPriceMulti || 10) * (data.DynamicPriceCriteria === "clicks" && clickmulti || titleId)
+                }
+
                 let rebirths = data.Rebirths
+                let title = data.GiveTitle
                 if (clicks >= cost) {
                     clicks -= cost
+
+                    if (title) {
+                        titleId += 1
+                    }
+
                     if (rebirths) {
                         clicksPerSecond = 0
                         clickmulti += rebirths
@@ -245,7 +256,7 @@
 
     function updateLabels() {
         var title = Titles[titleId - 1]
-        if (title != undefined) {
+        if (title) {
             titleLabel.innerHTML = title[0]
             titleLabel.style = "color: " + title[1]
         }
