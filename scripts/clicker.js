@@ -44,7 +44,7 @@
     // Options: DynamicPricing: bool?, Rebirths: int?, DynamicPriceMulti: int (default 10), DynamicPriceCriteria: string? \\
     // Format: ["Name", [Options], Cost, "Tooltip"] \\
     const Upgrades = [
-        ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceCriteria: "clicks" }, 10000, "Resets Clicks and Auto Clicks (you keep title)\n+1 Click Multi"],
+        ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceCriteria: "clicks", DynamicPriceMulti: 20 }, 10000, "Resets Clicks and Auto Clicks (you keep title)\n+1 Click Multi"],
         ["Upgrade Title", { GiveTitle: true, DynamicPricing: true, DynamicPriceCriteria: "title" }, 100000, "Upgrades your title"],
     ]
 
