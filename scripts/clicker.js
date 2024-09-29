@@ -211,7 +211,7 @@
             item[item.length + 1] = element
         })
 
-        let styleSheet = document.getElementById('stylesheet')
+        let styleSheet = document.getElementById("stylesheet")
         styleBtn.onclick = function () {
             let href = styleSheet.getAttribute("href")
             if (href == "") {
@@ -299,7 +299,7 @@
             setCookie("cs", clicksPerSecond, 365)
             setCookie("cm", clickmulti, 365)
             setCookie("ti", titleId, 365)
-            setCookie("nt", useNotation., 365)
+            setCookie("nt", useNotation, 365)
         });
 
         var isFocused = true
