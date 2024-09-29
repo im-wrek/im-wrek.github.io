@@ -1,12 +1,12 @@
 (() => {
     // Game Variables \\
-    var clicks = 0
-    var clicksPerSecond = 0
-    var clickmulti = 1
-    var multiplier = 1
-    var useNotation = false
+    let clicks = 0
+    let clicksPerSecond = 0
+    let clickmulti = 1
+    let multiplier = 1
+    let useNotation = false
 
-    var titleId = 1
+    let titleId = 1
 
     const Clickers = [
         ["Coal", 1, 10],
@@ -30,7 +30,7 @@
 
     // Format: Name, Color, FontSize?
     const Titles = [
-        ["Noob", "grey"]
+        ["Noob", "grey"],
         ["Average", "lightgrey"],
         ["😎 Cool 😎", "lightgrey"],
         ["Awesome Sauce", "lightgrey"],
@@ -60,7 +60,7 @@
     const clickmultiLabel = document.getElementById("clickMulti")
     const clickBtn = document.getElementById("click")
     const styleBtn = document.getElementById("style")
-    const titleLabel = document.getElementById("title")
+    const titleLabel = document.getElementById("ctitle")
     const multiBtn = document.getElementById("multiply")
     const notationBtn = document.getElementById("notation")
 
@@ -187,15 +187,15 @@
             element.insertAdjacentHTML("afterend", "<div class='s5px'></div>")
 
             element.onclick = function () {
-                var cost = cost
+                var newCost = cost
                 if (data.DynamicPricing === true) {
-                    cost *= (data.DynamicPriceMulti || 10) * (data.DynamicPriceCriteria === "clicks" && clickmulti || titleId)
+                    newCost *= (data.DynamicPriceMulti || 10) * (data.DynamicPriceCriteria === "clicks" && clickmulti || titleId)
                 }
 
                 let rebirths = data.Rebirths
                 let title = data.GiveTitle
-                if (clicks >= cost) {
-                    clicks -= cost
+                if (clicks >= newCost) {
+                    clicks -= newCost
 
                     if (title) {
                         titleId += 1
