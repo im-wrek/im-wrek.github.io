@@ -7,19 +7,23 @@
     var useNotation = false
 
     const Clickers = [
-        ["Bronze", 1, 10],
-        ["Silver", 5, 50],
-        ["Gold", 100, 1000],
-        ["Platinum", 500, 5000],
-        ["Diamond", 1000, 10000],
-        ["Amethyst", 5000, 50000],
+        ["Coal", 1, 10],
+        ["Nickel", 5, 50],
+        ["Copper", 10, 100],
+        ["Bronze", 10, 100],
+        ["Silver", 100, 1000],
+        ["Gold", 500, 5000],
+        ["Platinum", 1000, 10000],
+        ["Diamond", 5000, 50000],
         ["Sapphire", 10000, 100000],
-        ["Sterling Silver", 50000, 500000],
+        ["Diamond", 50000, 500000],
         ["Ruby", 100000, 1000000],
         ["Rose Gold", 500000, 5000000],
         ["Blood Diamond", 1000000, 10000000],
         ["Emerald", 5000000, 50000000],
         ["Alexandrite", 10000000, 100000000],
+        ["Tungsten", 50000000, 500000000],
+        ["Cobalt", 100000000, 1000000000],
     ]
 
     const Upgrades = [
