@@ -52,6 +52,10 @@
         ["Writer", { TitleId: 2 }, "Obtain your first title"],
     ]
 
+    var GivenAchievements = [
+
+    ]
+
     // Elements \\
     const clickmultiLabel = document.getElementById("clickMulti")
     const clickBtn = document.getElementById("click")
@@ -283,7 +287,7 @@
         clicksPerSecond = (parseFloat((getCookie("cs")) || 0))
         clickmulti = (parseFloat((getCookie("cm")) || 1))
         titleId = (parseFloat((getCookie("ti")) || 1))
-        useNotation = (new Boolean(getCookie("nt" || false)).valueOf())
+        useNotation = (new Boolean(getCookie("nt") || false).valueOf())
 
         clickBtn.onclick = function () {
             clicks += clickmulti
@@ -295,7 +299,7 @@
             setCookie("cs", clicksPerSecond, 365)
             setCookie("cm", clickmulti, 365)
             setCookie("ti", titleId, 365)
-            setCookie("nt", useNotation, 365)
+            setCookie("nt", useNotation., 365)
         });
 
         var isFocused = true
