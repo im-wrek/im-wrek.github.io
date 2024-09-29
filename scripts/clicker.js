@@ -6,11 +6,13 @@
     var multiplier = 1
     var useNotation = false
 
+    var titleId = 1
+
     const Clickers = [
         ["Coal", 1, 10],
         ["Nickel", 5, 50],
         ["Copper", 10, 100],
-        ["Bronze", 50, 00],
+        ["Bronze", 50, 500],
         ["Silver", 100, 1000],
         ["Gold", 500, 5000],
         ["Platinum", 1000, 10000],
@@ -26,13 +28,34 @@
         ["Cobalt", 100000000, 1000000000],
     ]
 
-    const Upgrades = [
-        ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceMulti: 10 }, 10000, "Resets Clicks and Auto Clicks\n+1 Click Multi"], // Format: ["Name", [Data], #Cost, "Tooltip"] \\
+    // Format: Name, Color, FontSize?
+    const Titles = [
+        ["Noob", "grey"]
+        ["Average", "lightgrey"],
+        ["😎 Cool 😎", "lightgrey"],
+        ["Awesome Sauce", "lightgrey"],
+        ["Intermediate", "snow"],
     ]
+
+    // Options: DynamicPricing: bool?, Rebirths: int?, DynamicPriceMulti: int (default 10), DynamicPriceCriteria: string? \\
+    // Format: ["Name", [Options], Cost, "Tooltip"] \\
+    const Upgrades = [
+        ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceCriteria: "clicks" }, 10000, "Resets Clicks and Auto Clicks (you keep title)\n+1 Click Multi"],
+        ["Upgrade Title", { DynamicPricing: true, DynamicPriceCriteria: "title" }, 1000000, "Upgrades your title"],
+    ]
+
+    // Requirements: Clicks, Rebirths, TitleId
+    // Format: ["Name", [Requirements], Cost, "Tooltip"]
+    const Achievements = [
+        ["Beginner", { Clicks: 1000 }, "Obtain 1,000 clicks"],
+        ["Intermediate", { Clicks: 1000 }, "Obtain 1,000 clicks"],
+    ]
+
     // Elements \\
     const clickmultiLabel = document.getElementById("clickMulti")
     const clickBtn = document.getElementById("click")
     const styleBtn = document.getElementById("style")
+    const titleLabel = document.getElementById("title")
     const multiBtn = document.getElementById("multiply")
     const notationBtn = document.getElementById("notation")
 
@@ -97,7 +120,7 @@
             let element = item[item.length - 1]
 
             if (data.DynamicPricing === true) {
-                cost *= data.DynamicPriceMulti * clickmulti
+                cost *= (data.DynamicPriceMulti || 10) * (data.DynamicPriceCriteria === "clicks" && clickmulti || titleId)
             }
 
             element.innerHTML = "Buy " + name + " (" + formatN(cost) + " clicks)"
@@ -220,6 +243,11 @@
     }
 
     function updateLabels() {
+        var title = Titles[titleId - 1]
+        if (title != undefined) {
+            titleLabel.innerHTML = title[0]
+            titleLabel.style = "color: " + title[1]
+        }
         clickLabel.innerHTML = "Clicks: " + formatN(clicks)
         autoclicksLabel.innerHTML = formatN(clicksPerSecond) + " cps " + "(" + formatN(clicksPerSecond * clickmulti) + ") cps"
         clickmultiLabel.innerHTML = formatN(clickmulti) + "x Click Multi"
@@ -242,6 +270,9 @@
         clicks = (parseFloat((getCookie("c")) || 0))
         clicksPerSecond = (parseFloat((getCookie("cs")) || 0))
         clickmulti = (parseFloat((getCookie("cm")) || 1))
+        titleId = (parseFloat((getCookie("ti")) || 1))
+        useNotation = new Boolean(getCookie("nt" || false))
+
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
@@ -251,6 +282,8 @@
             setCookie("c", clicks, 365)
             setCookie("cs", clicksPerSecond, 365)
             setCookie("cm", clickmulti, 365)
+            setCookie("ti", titleId, 365)
+            setCookie("nt", useNotation, 365)
         });
 
         var isFocused = true
@@ -260,7 +293,7 @@
             isFocused = !isFocused
             if (isFocused === true) {
                 let c = (((Date.now() - lastFocused) / 1000 * clicksPerSecond) * clickmulti)
-                
+
                 clicks += c
             } else {
                 lastFocused = Date.now()

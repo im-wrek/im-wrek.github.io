@@ -146,6 +146,11 @@ a:active {
     background-size: contain;
 }
 
+p#ctitle {
+    font-size: large;
+    font-weight: bolder;
+}
+
 .experiences a:hover {
     background: var(--button-bg-2);
     animation: to 0.25s;
