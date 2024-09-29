@@ -31,10 +31,14 @@
     // Format: Name, Color, FontSize?
     const Titles = [
         ["Noob", "grey"],
+        ["Getting there", "grey"]
         ["Average", "lightgrey"],
-        ["😎 Cool 😎", "lightgrey"],
+        ["Cool", "lightgrey"],
         ["Awesome Sauce", "lightgrey"],
         ["Intermediate", "snow"],
+        ["Professional", "lightblue"],
+        ["Executive", "silver"],
+        ["CEO", "yellowgreen", "32px"],
     ]
 
     // Options: DynamicPricing: bool?, Rebirths: int?, DynamicPriceMulti: int (default 10), DynamicPriceCriteria: string? \\
