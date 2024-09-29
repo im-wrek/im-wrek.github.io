@@ -41,14 +41,15 @@
     // Format: ["Name", [Options], Cost, "Tooltip"] \\
     const Upgrades = [
         ["Rebirth", { Rebirths: 1, DynamicPricing: true, DynamicPriceCriteria: "clicks" }, 10000, "Resets Clicks and Auto Clicks (you keep title)\n+1 Click Multi"],
-        ["Upgrade Title", { DynamicPricing: true, DynamicPriceCriteria: "title" }, 1000000, "Upgrades your title"],
+        ["Upgrade Title", { DynamicPricing: true, DynamicPriceCriteria: "title" }, 100000, "Upgrades your title"],
     ]
 
     // Requirements: Clicks, Rebirths, TitleId
     // Format: ["Name", [Requirements], Cost, "Tooltip"]
     const Achievements = [
         ["Beginner", { Clicks: 1000 }, "Obtain 1,000 clicks"],
-        ["Intermediate", { Clicks: 1000 }, "Obtain 1,000 clicks"],
+        ["Intermediate", { Clicks: 10000 }, "Obtain 10,000 clicks"],
+        ["Writer", { TitleId: 2 }, "Obtain your first title"],
     ]
 
     // Elements \\
@@ -271,8 +272,7 @@
         clicksPerSecond = (parseFloat((getCookie("cs")) || 0))
         clickmulti = (parseFloat((getCookie("cm")) || 1))
         titleId = (parseFloat((getCookie("ti")) || 1))
-        useNotation = new Boolean(getCookie("nt" || false))
-        console.log(useNotation)
+        useNotation = (new Boolean(getCookie("nt" || false)).valueOf())
 
         clickBtn.onclick = function () {
             clicks += clickmulti
