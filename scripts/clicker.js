@@ -31,7 +31,7 @@
     // Format: Name, Color, FontSize?
     const Titles = [
         ["Noob", "grey"],
-        ["Getting there", "grey"]
+        ["Getting there", "grey"],
         ["Average", "lightgrey"],
         ["Cool", "lightgrey"],
         ["Awesome Sauce", "lightgrey"],
