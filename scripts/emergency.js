@@ -1,5 +1,5 @@
 function load() {
-    document.body.insertAdjacentHTML("beforeend", "<footer>Press  Slash '/' at any time to go to Google Classroom")
+    document.body.insertAdjacentHTML("beforeend", "<footer>Press  Slash '/' at any time to go to Google Classroom</footer>")
 
     document.addEventListener("keyup", (ev) => {
         let key = ev.key.toLowerCase()
