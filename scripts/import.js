@@ -7,10 +7,23 @@ function loadNavbar() {
 </div>`)
 }
 
+function setupKeybind(){
+    document.body.insertAdjacentHTML("beforeend", "<footer>Press  Slash '/' at any time to go to Google Classroom</footer>")
+
+    document.addEventListener("keyup", (ev) => {
+        let key = ev.key.toLowerCase()
+
+        if (key === "/") {
+            window.location.href = "https://classroom.google.com/";
+        }
+    })
+}
+
 
 function check() {
     if (document.body) {
         loadNavbar()
+        setupKeybind()
     } else {
         setTimeout(check)
     }
