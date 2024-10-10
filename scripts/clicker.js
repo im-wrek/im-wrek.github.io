@@ -292,7 +292,7 @@
         clicksPerSecond = (parseFloat((getCookie("cs")) || 0))
         clickmulti = (parseFloat((getCookie("cm")) || 1))
         titleId = (parseFloat((getCookie("ti")) || 1))
-        useNotation = (new Boolean(getCookie("nt") || false).valueOf())
+        useNotation = ((getCookie("nt") || "false") === "true")
         console.log(useNotation)
 
         clickBtn.onclick = function () {
