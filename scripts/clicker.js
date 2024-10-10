@@ -226,7 +226,7 @@
         }
 
         multiBtn.onclick = function () {
-            multiplier += 1
+            multiplier += 10
             if (getDigits(multiplier) > (getDigits(clicks) + 1)) {
                 multiplier = 1
             }
