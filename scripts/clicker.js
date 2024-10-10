@@ -226,7 +226,7 @@
         }
 
         multiBtn.onclick = function () {
-            multiplier += 10
+            multiplier *= 10
             if (getDigits(multiplier) > (getDigits(clicks) + 1)) {
                 multiplier = 1
             }
@@ -292,7 +292,7 @@
         clicksPerSecond = (parseFloat((getCookie("cs")) || 0))
         clickmulti = (parseFloat((getCookie("cm")) || 1))
         titleId = (parseFloat((getCookie("ti")) || 1))
-        useNotation = (new Boolean(getCookie("nt") || false).valueOf())
+        useNotation = (new Boolean(getCookie("nt") || false).valueOf() || false)
         console.log(useNotation)
 
         clickBtn.onclick = function () {
