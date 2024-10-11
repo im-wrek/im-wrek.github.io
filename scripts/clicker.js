@@ -219,7 +219,7 @@
         styleBtn.onclick = function () {
             let href = styleSheet.getAttribute("href")
             if (href == "") {
-                styleSheet.setAttribute("href", "https://im-wrek.github.io/style.css")
+                styleSheet.setAttribute("href", "https://im-wrek.github.io/styles/style.css")
             } else {
                 styleSheet.setAttribute("href", "")
             }
