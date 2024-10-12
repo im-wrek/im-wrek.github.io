@@ -334,7 +334,7 @@
                 ev.target.setAttribute("disabled", true)
                 setInterval(() => {
                     ev.target.remove()
-                }, 1000);
+                }, 400);
             }
         })
 
