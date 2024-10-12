@@ -293,7 +293,7 @@
             let desc = achievement[2]
 
             if (requirements.Clicks != undefined && clicks >= requirements.Clicks || requirements.TitleId != undefined && titleId >= requirements.TitleId) {
-                achievementsDiv.insertAdjacentHTML("afterbegin", `<div class="achievement"><h1>${name}</h1><p>${desc}</p></div>`)
+                achievementsDiv.insertAdjacentHTML("afterbegin", `<div class="achievement"><h1 disabled>${name}</h1><p disabled>${desc}</p></div>`)
                 GivenAchievements[i] = i
             }
         }
