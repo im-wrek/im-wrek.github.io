@@ -4,6 +4,26 @@
     --button-bg-3: rgb(50, 50, 50);
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: .2rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(50, 50, 50); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 @keyframes to {
     from {
         background: var(--button-bg-1);
@@ -92,6 +112,60 @@ button.click {
     overflow: hidden;
     margin: 0px;
     display: block;
+}
+
+div.achievement {
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 200px;
+    height: 100px;
+    background: rgb(60, 60, 60);
+    color: white;
+    border-radius: 8px;
+    margin-left: 0px;
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    overflow: hidden;
+}
+
+div.achievement h1 {
+    margin: 0px;
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 1.4rem;
+    width: 100%;
+    display: inline-block;
+}
+
+div.achievement p {
+    margin: 0px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-size-adjust: auto;
+    width: 100%;
+    text-overflow: clip;
+    display: inline-block;
+}
+
+@keyframes achievement-bye {
+    to {margin-left: -100%; background: rgb(60, 60, 60)}
+}
+
+div.achievement.bye {
+    background: rgb(255, 255, 255);
+    animation: achievement-bye .5s forwards;
+}
+
+div.achievements {
+    margin: 0px;
+    display: block;
+    float: left;
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    height: fit-content;
+    text-align: left;
 }
 
 a {

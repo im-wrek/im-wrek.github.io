@@ -48,19 +48,17 @@
         ["Upgrade Title", { GiveTitle: true, DynamicPricing: true, DynamicPriceCriteria: "title" }, 100000, "Upgrades your title"],
     ]
 
-    // Requirements: Clicks, Rebirths, TitleId
-    // Format: ["Name", [Requirements], Cost, "Tooltip"]
+    // Format: ["Name", [Requirements], "Tooltip"]
     const Achievements = [
         ["Beginner", { Clicks: 1000 }, "Obtain 1,000 clicks"],
         ["Intermediate", { Clicks: 10000 }, "Obtain 10,000 clicks"],
         ["Writer", { TitleId: 2 }, "Obtain your first title"],
     ]
 
-    var GivenAchievements = [
-
-    ]
+    var GivenAchievements = []
 
     // Elements \\
+    const achievementsDiv = document.body.getElementsByClassName("achievements")[0]
     const clickmultiLabel = document.getElementById("clickMulti")
     const clickBtn = document.getElementById("click")
     const styleBtn = document.getElementById("style")
@@ -279,8 +277,25 @@
         updateLabels()
     }
 
+    let amtOfAchievements = Achievements.length
     function gameLoop() {
         clicks += ((clicksPerSecond / 10) * clickmulti)
+
+        for (let i = 0; i < amtOfAchievements; i++) {
+            if (GivenAchievements.at(i) != undefined) {
+                continue;
+            }
+
+            let achievement = Achievements[i]
+            let name = achievement[0]
+            let requirements = achievement[1]
+            let desc = achievement[2]
+
+            if (requirements.Clicks != undefined && clicks >= requirements.Clicks || requirements.TitleId != undefined && titleId >= requirements.TitleId) {
+                achievementsDiv.insertAdjacentHTML("afterbegin", `<div class="achievement"><h1>${name}</h1><p>${desc}</p></div>`)
+                GivenAchievements[i] = i
+            }
+        }
 
         update()
         setTimeout(gameLoop, 100)
@@ -293,20 +308,11 @@
         clickmulti = (parseFloat((getCookie("cm")) || 1))
         titleId = (parseFloat((getCookie("ti")) || 1))
         useNotation = ((getCookie("nt") || "false") === "true")
-        console.log(useNotation)
 
         clickBtn.onclick = function () {
             clicks += clickmulti
             update()
         }
-        update()
-        window.addEventListener('beforeunload', () => {
-            setCookie("c", clicks, 365)
-            setCookie("cs", clicksPerSecond, 365)
-            setCookie("cm", clickmulti, 365)
-            setCookie("ti", titleId, 365)
-            setCookie("nt", useNotation, 365)
-        });
 
         var isFocused = true
         var lastFocused = 0
@@ -321,6 +327,24 @@
                 lastFocused = Date.now()
             }
         }, false) // Eliminates need for a worker \\
+
+        document.addEventListener("click", function (ev) {
+            if (ev.target.classList.contains("achievement")) {
+                ev.target.classList.add("bye")
+                ev.target.setAttribute("disabled", true)
+                setInterval(() => {
+                    ev.target.remove()
+                }, 1000);
+            }
+        })
+
+        window.addEventListener('beforeunload', () => {
+            setCookie("c", clicks, 365)
+            setCookie("cs", clicksPerSecond, 365)
+            setCookie("cm", clickmulti, 365)
+            setCookie("ti", titleId, 365)
+            setCookie("nt", useNotation, 365)
+        });
 
         gameLoop()
     }
