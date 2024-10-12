@@ -8,10 +8,17 @@ function loadNavbar() {
 </div>`)
 }
 
-function setupKeybind(){
+function setupKeybind() {
     document.body.insertAdjacentHTML("beforeend", "<footer>Press  Slash '/' at any time to go to Google Classroom</footer>")
 
     document.addEventListener("keyup", (ev) => {
+        const target = ev.target
+        if (target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.isContentEditable) {
+
+            return;
+        }
         let key = ev.key.toLowerCase()
 
         if (key === "/") {
