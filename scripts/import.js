@@ -3,7 +3,6 @@ function loadNavbar() {
 <div class="topnav">
     <a href="/home/">Home</a>
     <a href="/home/#Experiences">Experiences</a>
-    <a href="/compilers">Compilers</a>
     <a href="https://classroom.google.com">Google Classroom</a>
 </div>`)
 }
@@ -37,4 +36,4 @@ function check() {
     }
 }
 
-check() // Faster load times
+check() // Faster load times 
