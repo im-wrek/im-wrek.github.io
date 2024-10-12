@@ -39,6 +39,7 @@
         ["Professional", "lightblue"],
         ["Executive", "silver"],
         ["CEO", "yellowgreen", "32px"],
+        ["Big", "blue", "48px"],
     ]
 
     // Options: DynamicPricing: bool?, Rebirths: int?, DynamicPriceMulti: int (default 10), DynamicPriceCriteria: string? \\
