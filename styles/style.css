@@ -212,7 +212,7 @@ div.button-grid a {
     display: inline-block;
     width: fit-content;
     height: fit-content;
-    padding: 10px;
+    padding: 30px;
     background: rgb(60, 60, 60);
     border: none;
     border-radius: 8px;
@@ -231,7 +231,7 @@ div.button-grid a:hover {
     animation: to 0.25s;
 }
 
-div.button-grid a:not(:disabled):active {
+div.button-grid a:active {
     background: var(--button-bg-1);
     animation: from 0.25s;
 }
