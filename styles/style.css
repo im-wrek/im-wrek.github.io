@@ -131,8 +131,8 @@ div.achievement {
     position: relative;
     text-align: left;
     overflow: hidden;
-    animation: achievement-bye .5s forwards;
-    animation-direction:reverse;
+    animation: achievement-bye .5s;
+    animation-direction: reverse;
 }
 
 div.achievement h1 {
