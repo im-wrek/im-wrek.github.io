@@ -114,6 +114,11 @@ button.click {
     display: block;
 }
 
+
+@keyframes achievement-hi {
+    from {margin-left: -100%; background-color: rgb(60, 60, 60)};
+    to {margin-left: 5px;}
+}
 @keyframes achievement-bye {
     to {margin-left: -100%; background-color: rgb(60, 60, 60)}
 }
@@ -131,8 +136,7 @@ div.achievement {
     position: relative;
     text-align: left;
     overflow: hidden;
-    animation: achievement-bye .5s;
-    animation-direction: reverse;
+    animation: achievement-hi .5s;
 }
 
 div.achievement h1 {
@@ -157,7 +161,7 @@ div.achievement p {
 
 div.achievement.bye {
     background-color: rgb(255, 255, 255);
-    animation: achievement-bye .5s;
+    animation: achievement-bye .5s forwards;
 }
 
 div.achievements {
