@@ -26,21 +26,21 @@
 
 @keyframes to {
     from {
-        background: var(--button-bg-1);
+        background-color: var(--button-bg-1);
     }
 
     to {
-        background: var(--button-bg-2);
+        background-color: var(--button-bg-2);
     }
 }
 
 @keyframes from {
     from {
-        background: var(--button-bg-2);
+        background-color: var(--button-bg-2);
     }
 
     to {
-        background: var(--button-bg-1);
+        background-color: var(--button-bg-1);
     }
 }
 
@@ -218,7 +218,6 @@ div.button-grid a {
     border-radius: 8px;
     animation: from 0.25s;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
 }
 
