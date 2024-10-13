@@ -9,7 +9,7 @@ function loadNavbar() {
 }
 
 function setupKeybind() {
-    document.body.insertAdjacentHTML("beforeend", "<footer>Press  Slash '/' at any time to go to Google Classroom</footer>")
+    document.body.insertAdjacentHTML("beforeend", "<br/><footer>Press  Slash '/' at any time to go to Google Classroom</footer>")
 
     document.addEventListener("keyup", (ev) => {
         const target = ev.target
