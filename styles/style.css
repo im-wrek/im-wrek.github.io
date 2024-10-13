@@ -157,7 +157,7 @@ div.achievement p {
 
 div.achievement.bye {
     background-color: rgb(255, 255, 255);
-    animation: achievement-bye .5s forwards;
+    animation: achievement-bye .5s;
 }
 
 div.achievements {
