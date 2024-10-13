@@ -210,14 +210,16 @@ div.button-grid a {
     color: white;
     text-decoration: none;
     display: inline-block;
-    padding: 30px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
     background: rgb(60, 60, 60);
     border: none;
     border-radius: 8px;
     animation: from 0.25s;
-    background-repeat: repeat;
-    background-attachment: local;
-    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 p#ctitle {
@@ -225,12 +227,12 @@ p#ctitle {
     font-weight: bolder;
 }
 
-div.experiences a:hover {
+div.button-grid a:hover {
     background: var(--button-bg-2);
     animation: to 0.25s;
 }
 
-div.experiences a:not(:disabled):active {
+div.button-grid a:not(:disabled):active {
     background: var(--button-bg-1);
     animation: from 0.25s;
 }
