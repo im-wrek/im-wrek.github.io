@@ -180,7 +180,7 @@ a:active {
     color: white;
 }
 
-.topnav a {
+div.topnav a {
     float: left;
     color: white;
     text-align: center;
@@ -189,23 +189,23 @@ a:active {
     font-size: 17px;
 }
 
-.topnav a:hover {
+div.topnav a:hover {
     background-color: grey;
     color: black;
 }
 
-.topnav a.active {
+div.topnav a.active {
     background-color: rgb(50, 50, 50);
     color: white;
 }
 
-.experiences {
+div.button-grid {
     overflow: visible;
     display: block;
     overflow-wrap: anywhere;
 }
 
-.experiences a {
+div.button-grid a {
     font-weight: bold;
     color: white;
     text-decoration: none;
@@ -225,12 +225,12 @@ p#ctitle {
     font-weight: bolder;
 }
 
-.experiences a:hover {
+div.experiences a:hover {
     background: var(--button-bg-2);
     animation: to 0.25s;
 }
 
-.experiences a:not(:disabled):active {
+div.experiences a:not(:disabled):active {
     background: var(--button-bg-1);
     animation: from 0.25s;
 }

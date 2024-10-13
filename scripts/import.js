@@ -3,6 +3,7 @@ function loadNavbar() {
 <div class="topnav">
     <a href="/home/">Home</a>
     <a href="/home/#Experiences">Experiences</a>
+    <a href="/home/#Links">Quick Links</a>
     <a href="https://classroom.google.com">Google Classroom</a>
 </div>`)
 }
