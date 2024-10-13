@@ -221,6 +221,10 @@ div.button-grid a {
     background-size: cover;
 }
 
+div.button-grid a p {
+    filter: none;
+}
+
 p#ctitle {
     font-size: large;
     font-weight: bolder;
