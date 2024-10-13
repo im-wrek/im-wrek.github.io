@@ -173,6 +173,7 @@ div.achievements {
     height: 100px;
     height: fit-content;
     text-align: left;
+    transition: 0.5s;
 }
 
 a {
