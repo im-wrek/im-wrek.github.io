@@ -219,6 +219,7 @@ div.button-grid a {
     animation: from 0.25s;
     background-repeat: no-repeat;
     background-size: cover;
+    z-index: -1;
 }
 
 div.button-grid a p {
