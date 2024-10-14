@@ -230,10 +230,6 @@ div.button-grid a {
     z-index: -1;
 }
 
-div.button-grid a p {
-    filter: none;
-}
-
 p#ctitle {
     font-size: large;
     font-weight: bolder;
