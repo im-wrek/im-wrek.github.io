@@ -225,9 +225,14 @@ div.button-grid a {
     border: none;
     border-radius: 8px;
     animation: from 0.25s;
+}
+
+div.button-grid a.img {
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: -1;
+    background-clip: padding-box;
+    background-blend-mode: normal;
+    background-attachment: fixed;
 }
 
 p#ctitle {
