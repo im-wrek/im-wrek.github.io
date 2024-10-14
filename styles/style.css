@@ -242,15 +242,6 @@ div.button-grid a.img {
     font-size: 100%;
 }
 
-div.button-grid a.img.blur::before {
-    position: absolute;
-    filter: blur(4px);
-}
-
-div.button-grid a.img.blur {
-    position: relative;
-}
-
 p#ctitle {
     font-size: large;
     font-weight: bolder;
