@@ -249,6 +249,10 @@ img.blur::before {
     filter: blur(4px);
 }
 
+img.blur::before {
+    position: relative;
+}
+
 p#ctitle {
     font-size: large;
     font-weight: bolder;
