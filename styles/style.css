@@ -242,12 +242,12 @@ div.button-grid a.img {
     font-size: 100%;
 }
 
-img.blur::before {
+div.button-grid a.img.blur::before {
     position: absolute;
     filter: blur(4px);
 }
 
-img.blur {
+div.button-grid a.img.blur {
     position: relative;
 }
 
