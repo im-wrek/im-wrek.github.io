@@ -230,9 +230,6 @@ div.button-grid a {
 div.button-grid a.img {
     background-repeat: no-repeat;
     background-size: cover;
-    background-clip: padding-box;
-    background-blend-mode: normal;
-    background-attachment: fixed;
 }
 
 p#ctitle {
