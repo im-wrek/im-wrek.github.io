@@ -242,6 +242,7 @@ div.button-grid a {
 div.button-grid a.img {
     background-repeat: no-repeat;
     background-size: cover;
+    font-size: 75%;
 }
 
 img.blur::before {
