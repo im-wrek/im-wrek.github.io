@@ -230,7 +230,7 @@ div.button-grid a {
     color: white;
     text-decoration: none;
     display: inline-block;
-    padding: 30px;
+    padding: 32px;
     background-color: rgb(60, 60, 60);
     border: none;
     border-radius: 8px;
@@ -247,7 +247,7 @@ img.blur::before {
     filter: blur(4px);
 }
 
-img.blur::before {
+img.blur {
     position: relative;
 }
 
