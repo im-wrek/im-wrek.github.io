@@ -29,6 +29,7 @@ function setupKeybind() {
 
 
 function check() {
+    
     if (document.body) {
         loadNavbar()
         setupKeybind()
