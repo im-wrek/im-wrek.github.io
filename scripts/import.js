@@ -29,14 +29,14 @@ function setupKeybind() {
 
 
 function check() {
-    if(window.location.href.includes("/index.html")!=undefined){
-        var url = document.querySelector('meta[property="og:url"]');
-        url = url ? url.content : null;
-        if(url!=undefined){
-            window.location.href=url
-        }
-    }
     if (document.body) {
+        if(window.location.href.includes("/index.html")!=undefined){
+            var url = document.querySelector('meta[property="og:url"]');
+            url = url ? url.content : null;
+            if(url!=undefined){
+                window.location.href=url
+            }
+        }
         loadNavbar()
         setupKeybind()
     } else {
