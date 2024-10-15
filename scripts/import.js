@@ -30,7 +30,7 @@ function setupKeybind() {
 
 function check() {
     if (document.body) {
-        if(window.location.href.includes("/index.html")!=undefined){
+        if(window.location.href.includes("/index.html")===true){
             var url = document.querySelector('meta[property="og:url"]');
             url = url ? url.content : null;
             if(url!=undefined){
