@@ -26,7 +26,7 @@ function setupKeybind() {
         }
     })
 
-    document.head.insertAdjacentHTML("beforeend", `<script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>`)
+    document.head.insertAdjacentHTML("beforeend", `<script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous">twemoji.parse(document.body)</script>`)
 }
 
 
