@@ -40,6 +40,8 @@
         ["Executive", "silver"],
         ["CEO", "yellowgreen", "32px"],
         ["Big", "blue", "48px"],
+        ["???", "grey", "48px"],
+        ["🍎 Apple", "red", "48px"],
     ]
 
     // Options: DynamicPricing: bool?, Rebirths: int?, DynamicPriceMulti: int (default 10), DynamicPriceCriteria: string? \\
@@ -269,7 +271,7 @@
             titleLabel.style = "color: " + title[1]
         }
         clickLabel.innerHTML = "Clicks: " + formatN(clicks)
-        autoclicksLabel.innerHTML = formatN(clicksPerSecond) + " cps " + "(" + formatN(clicksPerSecond * clickmulti) + ") cps"
+        autoclicksLabel.innerHTML = formatN(clicksPerSecond * clickmulti) + " cps " + "(" + formatN(clicksPerSecond) + ") cps"
         clickmultiLabel.innerHTML = formatN(clickmulti) + "x Click Multi"
     }
 
