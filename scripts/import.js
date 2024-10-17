@@ -25,8 +25,6 @@ function setupKeybind() {
             window.location.href = "https://classroom.google.com/";
         }
     })
-
-    document.head.insertAdjacentHTML("beforeend", `<script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous">twemoji.parse(document.body)</script>`)
 }
 
 
