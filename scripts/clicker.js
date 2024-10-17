@@ -42,6 +42,7 @@
         ["Big", "blue", "48px"],
         ["???", "grey", "48px"],
         ["🍎 Apple", "red", "48px"],
+        ["🍐 Pear", "yellowgreen", "48px"],
     ]
 
     // Options: DynamicPricing: bool?, Rebirths: int?, DynamicPriceMulti: int (default 10), DynamicPriceCriteria: string? \\
